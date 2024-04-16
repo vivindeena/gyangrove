@@ -7,19 +7,19 @@ const format = require("pg-format");
 
 async function readFile(file) {
 	const result = [];
+	console.log(file);
+	console.log(process.cwd());
 
 	await new Promise((resolve, reject) => {
 		fs.createReadStream(file.path)
 			.pipe(csv())
 			.on("data", (data) => result.push(data))
 			.on("end", () => {
-				fs.unlinkSync(file.path);
+				fs.unlinkSync('./'+file.path);
 				resolve();
 			})
 			.on("error", (err) => reject(err));
 	});
-
-	console.log(result);
 	const insertValues = result.map((item) => [
 		item.event_name,
 		item.city_name,
@@ -46,7 +46,6 @@ const injestFromCSV = async (req, res) => {
 		const deleteRes = await client.query(deleteQuery);
 		if (deleteRes.rowCount < 0) {
 			await client.query("ROLLBACK");
-			console.log(deleteRes.rowCount);
 			return res.status(500).json({
 				message: "Error deleting existing events. Try again later.",
 			});
