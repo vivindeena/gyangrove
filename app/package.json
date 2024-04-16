@@ -4,6 +4,8 @@
   "description": "Task submission for GyanGrove",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,8 +19,13 @@
   },
   "homepage": "https://github.com/vivindeena/gyangrove#readme",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "csv-parser": "^3.0.0",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.11.5",
+    "pg-format": "^1.0.4"
   },
   "devDependencies": {
     "dotenv": "^16.4.5",

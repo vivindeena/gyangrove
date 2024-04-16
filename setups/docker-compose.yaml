@@ -1,0 +1,25 @@
+version: "3.2"
+
+services:
+  db:
+    image: postgres:alpine
+    container_name: my_postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_ADMIN_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresDB_data:/var/lib/postgresql/data
+  app:
+    image: app-image
+    container_name: event-app-container
+    env_file:
+      - ./.env
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgresDB_data:
