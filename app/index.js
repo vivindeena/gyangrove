@@ -8,7 +8,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 const injest = require("./routes/injest");
-const find = require("./routes/find");
+const events = require("./routes/events");
+
+process.env.TZ = "UTC";
 
 app.get("/", (req, res) => {
 	res.status(200).json({
@@ -17,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/injest", injest);
-app.use("api/find", find);
+app.use("/api/events", events);
 
 app.listen(process.env.PORT, () => {
 	console.log(`Listening on port ${process.env.PORT}`);

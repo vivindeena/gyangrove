@@ -1,7 +1,7 @@
 const csv = require("csv-parser");
 const fs = require("fs");
 
-const db = require("../db/db");
+const { dbUserPool } = require("../db/db");
 const format = require("pg-format");
 
 
@@ -33,12 +33,12 @@ async function readFile(file) {
 
 const injestFromCSV = async (req, res) => {
 	if (!req.file) {
-		return res.status(400).send("No file uploaded.");
+		return res.status(400).send("Missing Params");
 	}
 	const result = await readFile(req.file);
 	let client;
 	try {
-		client = await db.dbUserPool.connect();
+		client = await dbUserPool.connect();
 		await client.query("BEGIN");
 
 		const deleteQuery = "DELETE FROM events where 1=1";
@@ -52,7 +52,7 @@ const injestFromCSV = async (req, res) => {
 		}
 
 		const insertQuery = format(
-			"INSERT INTO events (event_name, city_name, event_date, event_time, latitude, longitude) VALUES %L;",
+			"INSERT INTO events (event_name, city_name, date, event_time, latitude, longitude) VALUES %L;",
 			result
 		);
 		const insertRes = await client.query(insertQuery);		
@@ -67,6 +67,7 @@ const injestFromCSV = async (req, res) => {
 		console.log(error);
 		return res.status(500).json({
 			message: "Database error occurred, Try again later.",
+			error: error.message,
 		});
 	} finally {
 		client.release();
@@ -75,16 +76,16 @@ const injestFromCSV = async (req, res) => {
 
 const injestFromCSVAppend = async(req, res)  => {
 	if (!req.file) {
-		return res.status(400).send("No file uploaded.");
+		return res.status(400).send("Misssing Params");
 	}
 	const result = await readFile(req.file);
 	let client;
 	try {
-		client = await db.dbUserPool.connect();
+		client = await dbUserPool.connect();
 		await client.query("BEGIN");
 
 		const insertQuery = format(
-			"INSERT INTO events (event_name, city_name, event_date, event_time, latitude, longitude) VALUES %L;",
+			"INSERT INTO events (event_name, city_name, date, event_time, latitude, longitude) VALUES %L;",
 			result
 		);
 		const insertRes = await client.query(insertQuery);
@@ -98,6 +99,7 @@ const injestFromCSVAppend = async(req, res)  => {
 		console.log(error);
 		return res.status(500).json({
 			message: "Database error occurred, Try again later.",
+			error: error.message,
 		});
 	} finally {
 		client.release();
