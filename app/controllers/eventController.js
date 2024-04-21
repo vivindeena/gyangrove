@@ -17,16 +17,16 @@ const find = async(req, res) => {
 			`WITH filtered_events AS (
 				SELECT event_name, city_name, date, event_time, latitude, longitude
 				FROM events
-				WHERE date >= TO_DATE( %L , 'YYYY-MM-DD')
-            	AND date <= TO_DATE( %L , 'YYYY-MM-DD') + INTERVAL '14 days' 
+				WHERE event_date >= TO_DATE( %L , 'YYYY-MM-DD')
+            	AND event_date <= TO_DATE( %L , 'YYYY-MM-DD') + INTERVAL '14 days'
+				ORDER BY date ASC, event_time ASC 
 			)
 			SELECT *,(SELECT COUNT(*) FROM filtered_events) AS total_count
 			FROM filtered_events
-			ORDER BY date ASC, event_time ASC
 			LIMIT 10 OFFSET %L;`,
-            date,
 			date,
-			(pageNo-1) * 10
+			date,
+			(pageNo - 1) * 10
 		);
 
 		const data = await client.query(query);
@@ -51,10 +51,11 @@ const find = async(req, res) => {
 			]);
             element.weather = weatherData.weather;
 			element.distance_km = distanceData.distance;
+			element.event_date = element.date;
             delete element.latitude;
             delete element.longitude;
 			delete element.total_count;
-
+			delete element.event_date;
 			return element;
 
 		});

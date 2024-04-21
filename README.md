@@ -1,15 +1,35 @@
 # Event management system
 
-## Backend Documentation: 
+## Backend Documentation: [Click here :bookmark_tabs:](https://documenter.getpostman.com/view/21780682/2sA3BobXRW)
 
-## Deployed Link: [Click here :cloud:](https://gyangrove-lnvv.onrender.com)
+## Deployed Link: [Click here :cloud:]()
 
 
-## Design Choice
+## Tech Stack and Database Choice
+
+### Node.js
+- **Scalability:** Node.js offers asynchronous event-driven architecture, making it suitable for handling concurrent operations and scaling horizontally.
+- **Development Speed:** With a vast ecosystem of libraries and packages, Node.js enables rapid development and easy integration of external APIs.
+- **RESTful APIs:** Node.js is well-suited for building RESTful services, facilitating the implementation of API endpoints for data management.
+
+### PostgreSQL
+- **Relational Database:** PostgreSQL provides ACID compliance, ensuring data integrity and reliability for managing event data.
+- **Indexing:** Utilizing appropriate indexes enhances query performance, especially for spatial and date-based queries in a large dataset.
+
+### Docker Compose
+- **Containerization:** Docker Compose simplifies deployment by containerizing the application components, ensuring consistent environments across development, testing, and production.
+- **Orchestration:** Managing multiple containers as a single service streamlines deployment and maintenance, enhancing scalability and reliability.
+
+### AWS Deployment
+- **Scalability:** AWS provides scalable infrastructure with services like EC2, ECS, or EKS, enabling seamless scaling based on workload demands.
+- **Integration:** AWS integrates seamlessly with Docker containers, allowing easy deployment and management through services like ECS or EKS.
+- **Cost-Effectiveness:** Leveraging AWS's pay-as-you-go model and free-tier services can optimize costs for hosting and scaling the application.
+
+**Summary:** The chosen tech stack and database combination leverages Node.js for agility and scalability, PostgreSQL for robust data management and geospatial capabilities, Docker Compose for containerized deployment, and AWS for scalable, reliable, and cost-effective hosting solutions.
+
 
 
 ## Link to Video Demo: 
-
 
 ## Running Project Locally
 

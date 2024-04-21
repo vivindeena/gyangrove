@@ -49,7 +49,7 @@ const injestFromCSV = async (req, res) => {
 		}
 
 		const insertQuery = format(
-			"INSERT INTO events (event_name, city_name, date, event_time, latitude, longitude) VALUES %L RETURNING ID;",
+			"INSERT INTO events (event_name, city_name, event_date, event_time, latitude, longitude) VALUES %L RETURNING ID;",
 			result
 		);
 		const insertRes = await client.query(insertQuery);		

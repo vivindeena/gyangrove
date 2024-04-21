@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   db:
-    image: postgres:alpine
+    image: db-image
     container_name: my_postgres_db
     restart: always
     environment:
@@ -11,8 +11,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
-    volumes:
-      - postgresDB_data:/var/lib/postgresql/data
+    # volumes:
+    #   - postgresDB_data:/var/lib/postgresql/data
   app:
     image: app-image
     container_name: event-app-container
