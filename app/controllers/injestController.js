@@ -83,7 +83,7 @@ const injestFromCSVAppend = async(req, res)  => {
 
 		const insertQuery = format(
 			`WITH inserted_row AS ( 
-				   INSERT INTO events (event_name, city_name, date, event_time, latitude, longitude) 
+				   INSERT INTO events (event_name, city_name, event_date, event_time, latitude, longitude) 
 				   VALUES %L RETURNING id 
 				) 
 				SELECT id, (SELECT COUNT(*) FROM events) AS total_rows FROM inserted_row;`,

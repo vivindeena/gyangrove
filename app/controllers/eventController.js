@@ -15,11 +15,11 @@ const find = async(req, res) => {
 		client = await dbUserPool.connect();
 		const query = format(
 			`WITH filtered_events AS (
-				SELECT event_name, city_name, date, event_time, latitude, longitude
+				SELECT event_name, city_name, event_date, event_time, latitude, longitude
 				FROM events
 				WHERE event_date >= TO_DATE( %L , 'YYYY-MM-DD')
             	AND event_date <= TO_DATE( %L , 'YYYY-MM-DD') + INTERVAL '14 days'
-				ORDER BY date ASC, event_time ASC 
+				ORDER BY event_date ASC, event_time ASC 
 			)
 			SELECT *,(SELECT COUNT(*) FROM filtered_events) AS total_count
 			FROM filtered_events
@@ -32,8 +32,8 @@ const find = async(req, res) => {
 		const data = await client.query(query);
 		const totalEvents = data.rows[0].total_count;
 		let promises = data.rows.map(async (element) => {
-			element.date = element.date.toISOString().split("T")[0];
-
+			element.date = element.event_date.toISOString().split("T")[0];
+			delete element.event_date;
 			let weatherPromise = find_weather(
 				element.city_name,
 				element.date
@@ -51,11 +51,9 @@ const find = async(req, res) => {
 			]);
             element.weather = weatherData.weather;
 			element.distance_km = distanceData.distance;
-			element.event_date = element.date;
             delete element.latitude;
             delete element.longitude;
 			delete element.total_count;
-			delete element.event_date;
 			return element;
 
 		});

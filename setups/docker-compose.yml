@@ -10,14 +10,15 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5432:5432"
-    # volumes:
-    #   - postgresDB_data:/var/lib/postgresql/data
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgresDB_data:/var/lib/postgresql/data
   app:
     image: app-image
     container_name: event-app-container
     environment:
       - TZ=UTC
+      - POSTGRES_HOST=db
     env_file:
       - ./.env
     ports:

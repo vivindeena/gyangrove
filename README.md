@@ -62,15 +62,6 @@
      chmod +x setup.sh
      ```
 
-   - On another terminal, run the following command to set up the database:
-     ```bash
-     ./database-setup.sh
-     ```
-     If unable to execute, give necessary executable permission. For example:
-     ```bash
-     chmod +x database-setup.sh
-     ```
-
 6. **Accessing the Project:**
    - Open your web browser and enter the following URL to access the project locally:
      ```
