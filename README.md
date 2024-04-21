@@ -2,8 +2,8 @@
 
 ## Backend Documentation: 
 
-## Deployed Link: [Click here :cloud:] (https://gyangrove-lnvv.onrender.com)
-:warning: Due to Render's free plan, the server may take up to a minute to start if inactive.
+## Deployed Link: [Click here :cloud:](https://gyangrove-lnvv.onrender.com)
+
 
 ## Design Choice
 
@@ -22,24 +22,33 @@
      git clone https://github.com/vivindeena/gyangrove.git
      ```
 
-3. **Environment Variables Setup:**
-   - Create an `.env` file in the root directory of the project.
-   - Add the following variables to the `.env` file and assign values to them:
-     - `PORT`: Specify the port number on which the server will run.
-
-     You can use the provided `.env.example` file as a reference.
-
-4. **Install Dependencies:**
-   - Navigate to the project directory in your terminal.
-   - Run the following command to install the project dependencies:
+3. **Change Directories:**
+   - Switch to the cloned directory, and then to the setup folder:
      ```bash
-     npm install
+     cd gyangrove/setups/
      ```
 
-5. **Running the Project:**
-   - Once the dependencies are installed, start the server by running:
+4. **Environment Variables Setup:**
+   - Create an `.env` file in the root directory of the project.
+   - Add the following variables to the `.env` file and assign values to them. You can use the provided `.env.example` file as a reference.
+
+5. **Running the project:**
+   - Execute the setup script:
      ```bash
-     npm start
+     ./setup.sh
+     ```
+     If unable to execute, give necessary executable permission. For example:
+     ```bash
+     chmod +x setup.sh
+     ```
+
+   - On another terminal, run the following command to set up the database:
+     ```bash
+     ./database-setup.sh
+     ```
+     If unable to execute, give necessary executable permission. For example:
+     ```bash
+     chmod +x database-setup.sh
      ```
 
 6. **Accessing the Project:**
@@ -49,18 +58,58 @@
      ```
      Replace `<PORT>` with the port number specified in your `.env` file.
 
+7. **Starting and Stopping the project:**
+   - To start and stop the project, navigate to the same folder and,
+
+   - To start the Docker containers:
+     ```bash
+     docker-compose up
+     ```
+   - To stop the Docker containers, use:
+     ```bash
+     docker-compose down
+     ``` 
+
 ## Possible Improvements
 1. User segregration for DB to imporve security
 
+2. Implement a logging library like ```winston``` to log HTTP requests and other important information.
+
+3. Add a global error handler middleware to handle any uncaught exceptions or unhandled promise rejections.
+
+4. User authenticaltion using libraries like ```jsonwebtoken``` and ```passportjs``` 
+
+5. Implementaion of docker swarm and to scale the solution horizontally
+
+
 ## Tasks :white_check_mark:
- - [X] Start a PostgreSQL Container using Docker.
- - [X] Design Tables for the database schema.
- - [X] Write Scripts to set up the databases and tables.
- - [X] Create the Data Creation API endpoint.
- - [] Develop the Event Finder API endpoint. 
- - [X] Containerize the application for deployment.
- - [X] Writing the Docker Compose file
+- [X] Start a PostgreSQL Container using Docker.
 
-#### Data Injestion Endpoint:
+- [X] Design Tables for the database schema.
 
-#### Event Finder Endpoint: 
+- [X] Write Scripts to set up the databases and tables.
+
+- [X] Create the Data Creation API endpoint.
+
+- [X] Develop the Event Finder API endpoint.
+
+- [X] Containerize the application for deployment.
+
+- [X] Writing the Docker Compose file.
+
+
+### Data Injestion Endpoint:
+- [X] Process data from CSV using csv-parser.
+
+- [X] Add Data to table, by deleting existing data.
+
+- [X] Append Data to table.
+
+
+### Event Finder Endpoint: 
+- [X] Find events data.
+
+- [X] Add Pagination to the Endpoint.
+
+- [X] Use Promises to parallelize fetching data from External API.
+

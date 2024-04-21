@@ -7,9 +7,6 @@ const format = require("pg-format");
 
 async function readFile(file) {
 	const result = [];
-	console.log(file);
-	console.log(process.cwd());
-
 	await new Promise((resolve, reject) => {
 		fs.createReadStream(file.path)
 			.pipe(csv())
@@ -52,14 +49,14 @@ const injestFromCSV = async (req, res) => {
 		}
 
 		const insertQuery = format(
-			"INSERT INTO events (event_name, city_name, date, event_time, latitude, longitude) VALUES %L;",
+			"INSERT INTO events (event_name, city_name, date, event_time, latitude, longitude) VALUES %L RETURNING ID;",
 			result
 		);
 		const insertRes = await client.query(insertQuery);		
-
 		await client.query("COMMIT");
 		return res.status(200).json({
 			message: "Events added successfully",
+			total_rows: `${insertRes.rows.length}`,
 		});
 
 	} catch (error) {
@@ -85,14 +82,19 @@ const injestFromCSVAppend = async(req, res)  => {
 		await client.query("BEGIN");
 
 		const insertQuery = format(
-			"INSERT INTO events (event_name, city_name, date, event_time, latitude, longitude) VALUES %L;",
+			`WITH inserted_row AS ( 
+				   INSERT INTO events (event_name, city_name, date, event_time, latitude, longitude) 
+				   VALUES %L RETURNING id 
+				) 
+				SELECT id, (SELECT COUNT(*) FROM events) AS total_rows FROM inserted_row;`,
 			result
 		);
-		const insertRes = await client.query(insertQuery);
 
+		const insertRes = await client.query(insertQuery);
 		await client.query("COMMIT");
 		return res.status(200).json({
-			message: "Events added successfully",
+			message: "Events appended successfully",
+			total_rows: insertRes.rows[0].total_rows,
 		});
 	} catch (error) {
 		await client.query("ROLLBACK");
