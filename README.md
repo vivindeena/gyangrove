@@ -51,7 +51,7 @@
 5. **Running the project:**
    - Execute the setup script:
      ```bash
-     ./setup.sh
+     sudo sh setup.sh
      ```
      If unable to execute, give necessary executable permission. For example:
      ```bash
