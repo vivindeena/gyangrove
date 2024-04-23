@@ -25,7 +25,7 @@
 - **Cost-Effectiveness:** Leveraging AWS's pay-as-you-go model and free-tier services can optimize costs for hosting and scaling the application.
 
 
-## Link to Video Demo: 
+## Link to Video Demo: [Click here :video_camera:](https://www.youtube.com/watch?v=Heb1HhcSyHc)
 
 ## Running Project Locally
 

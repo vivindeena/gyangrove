@@ -15,11 +15,11 @@ const find = async(req, res) => {
 		client = await dbUserPool.connect();
 		const query = format(
 			`WITH filtered_events AS (
-				SELECT event_name, city_name, event_date, event_time, latitude, longitude
+				SELECT event_name, city_name, event_date, latitude, longitude
 				FROM events
 				WHERE event_date >= TO_DATE( %L , 'YYYY-MM-DD')
             	AND event_date <= TO_DATE( %L , 'YYYY-MM-DD') + INTERVAL '14 days'
-				ORDER BY event_date ASC, event_time ASC 
+				ORDER BY event_date ASC 
 			)
 			SELECT *,(SELECT COUNT(*) FROM filtered_events) AS total_count
 			FROM filtered_events
