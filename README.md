@@ -2,8 +2,7 @@
 
 ## Backend Documentation: [Click here :bookmark_tabs:](https://documenter.getpostman.com/view/21780682/2sA3BobXRW)
 
-## Deployed Link: [Click here :cloud:]()
-
+## Deployed Link: (Deployed on AWS EC2 instances :cloud:) [ec2-user@ec2-13-232-198-78.ap-south-1.compute.amazonaws.com](ec2-user@ec2-13-232-198-78.ap-south-1.compute.amazonaws.com)
 
 ## Tech Stack and Database Choice
 
@@ -24,9 +23,6 @@
 - **Scalability:** AWS provides scalable infrastructure with services like EC2, ECS, or EKS, enabling seamless scaling based on workload demands.
 - **Integration:** AWS integrates seamlessly with Docker containers, allowing easy deployment and management through services like ECS or EKS.
 - **Cost-Effectiveness:** Leveraging AWS's pay-as-you-go model and free-tier services can optimize costs for hosting and scaling the application.
-
-**Summary:** The chosen tech stack and database combination leverages Node.js for agility and scalability, PostgreSQL for robust data management and geospatial capabilities, Docker Compose for containerized deployment, and AWS for scalable, reliable, and cost-effective hosting solutions.
-
 
 
 ## Link to Video Demo: 
