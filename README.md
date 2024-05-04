@@ -2,7 +2,7 @@
 
 ## Backend Documentation: [Click here :bookmark_tabs:](https://documenter.getpostman.com/view/21780682/2sA3BobXRW)
 
-## Deployed Link: (Deployed on AWS EC2 instances :cloud:) [ec2-13-232-198-78.ap-south-1.compute.amazonaws.com](ec2-13-232-198-78.ap-south-1.compute.amazonaws.com)
+## Deployed Link: (Deployed on AWS EC2 instances :cloud:) Deployment Closed
 
 ## Tech Stack and Database Choice
 
